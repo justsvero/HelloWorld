@@ -1,6 +1,7 @@
 package dev.svero.playground.helloworld;
 
 import org.apache.commons.cli.*;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Implements the entry point for running this Java application.
@@ -52,6 +53,10 @@ public class Application {
         String username = "World";
         if (cmd.hasOption('u')) {
             username = cmd.getOptionValue('u');
+            if (StringUtils.isBlank(username)) {
+                System.err.println("You need to specify a non-blank value as username!");
+                return;
+            }
         }
 
         System.out.printf("Hello, %s! Greetings from Java!%n", username);
